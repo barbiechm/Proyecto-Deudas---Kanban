@@ -16,6 +16,18 @@
     --despliegue: #9B59B6;
 }
 
+.img_kanban_v1{
+    
+    text-align: center;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--gradient);
+    color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    width: 80%;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -456,5 +468,164 @@ button#openCreateTaskModal:hover {
     .modal-content {
         margin-top: 20%;
         width: 95%;
+    }
+}
+
+/* Contenedor principal del diagrama */
+.db-schema-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente línea si no caben */
+    justify-content: center; /* Centra las tablas si hay espacio extra */
+    align-items: flex-start; /* Alinea las tablas en la parte superior */
+    gap: 25px; /* Espacio entre las tablas y el indicador de relación */
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f9; /* Un fondo suave */
+    border-radius: 8px;
+    border: 1px solid #d3e0ea;
+    margin: 20px; /* Margen exterior */
+    overflow-x: auto; /* Scroll horizontal si es necesario */
+}
+
+/* Estilo para cada tabla */
+.db-table {
+    border: 1px solid #b0c4de; /* Borde azul claro */
+    border-radius: 6px;
+    background-color: #ffffff; /* Fondo blanco */
+    box-shadow: 0 2px 5px rgba(0, 83, 156, 0.1); /* Sombra sutil */
+    flex: 1; /* Permite que las tablas crezcan */
+    min-width: 280px; /* Ancho mínimo para evitar que se aplasten mucho */
+    max-width: 400px; /* Ancho máximo opcional */
+    margin-bottom: 20px; /* Espacio si se envuelven */
+}
+
+/* Nombre de la tabla */
+.table-name {
+    margin: 0;
+    padding: 10px 15px;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-align: center;
+    background-color: #eaf2f8; /* Fondo ligeramente diferente para el encabezado */
+    color: #1f497d; /* Color azul oscuro */
+    border-bottom: 1px solid #b0c4de;
+    border-radius: 6px 6px 0 0; /* Redondea solo las esquinas superiores */
+}
+
+/* Lista de columnas */
+.column-list {
+    list-style: none;
+    padding: 10px 15px;
+    margin: 0;
+}
+
+/* Cada item de columna */
+.column-list li {
+    padding: 6px 0;
+    border-bottom: 1px dashed #e0e0e0; /* Separador punteado */
+    display: flex;
+    justify-content: space-between; /* Separa nombre/tipo */
+    align-items: center; /* Centra verticalmente */
+    font-size: 0.9em;
+    flex-wrap: wrap; /* Permite envolver si es muy largo */
+}
+.column-list li:last-child {
+    border-bottom: none; /* Sin borde en el último elemento */
+}
+
+/* Tipo de dato de la columna */
+.column-list .type {
+    font-style: italic;
+    color: #555;
+    margin-left: 8px; /* Espacio entre nombre y tipo */
+    white-space: nowrap; /* Evita que el tipo se rompa */
+}
+
+/* Información de Llaves (PK, FK) y Restricciones */
+.key-info, .constraint {
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-left: 8px;
+}
+.pk { /* Llave Primaria */
+    color: #8B0000; /* Rojo oscuro */
+    font-weight: bold;
+}
+.fk { /* Llave Foránea */
+    color: #006400; /* Verde oscuro */
+    font-weight: bold;
+}
+.key-info { /* Etiqueta PK/FK */
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+}
+.key-info.FK { background-color: #e0f0e0; border-color: #a0c0a0; } /* Distinguir etiqueta FK */
+.key-info.PK { background-color: #f0e0e0; border-color: #c0a0a0; } /* Distinguir etiqueta PK */
+
+
+.constraint { /* Otras restricciones como UNIQUE */
+    color: #b8860b; /* Dorado oscuro */
+    background-color: #fff8dc; /* Crema */
+    border: 1px solid #eedc82; /* Mostaza */
+}
+
+
+/* Indicador de la Relación */
+.relationship {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    color: #4682b4; /* Azul acero */
+    min-height: 150px; /* Asegura espacio vertical */
+    align-self: center; /* Centra el bloque de relación verticalmente */
+}
+.relationship .line {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin: 5px 0;
+    letter-spacing: -1px;
+}
+.relationship .cardinality {
+    font-size: 0.9em;
+    font-weight: bold;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin: 5px 0;
+}
+.relationship .relationship-name {
+    font-style: italic;
+    font-size: 0.85em;
+    margin: 5px 0;
+}
+.relationship .fk-involved {
+    font-size: 0.8em;
+    color: #555;
+    margin-top: 5px;
+}
+
+/* Media Query para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .db-schema-container {
+        flex-direction: column; /* Apila las tablas verticalmente */
+        align-items: center; /* Centra las tablas apiladas */
+    }
+    .relationship {
+        padding: 15px 0; /* Menos padding vertical */
+        min-height: auto; /* Altura automática */
+        /* Podrías querer rotar la línea o cambiar el texto aquí */
+        /* transform: rotate(90deg); */ /* Ejemplo de rotación si fuera necesario */
+    }
+    .db-table {
+        width: 90%; /* Ocupa más ancho en pantallas pequeñas */
+        max-width: none; /* Sin ancho máximo */
+        flex: none; /* Sin flex-grow */
     }
 }

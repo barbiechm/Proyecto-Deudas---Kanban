@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KANBAN BARBARA CHACIN</title>
+    <title>Kanban - Control de Deudas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -86,6 +86,90 @@
             </div>
         </div>
     </main>
+
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagrama de Base de Datos</title>
+    <link rel="stylesheet" href="schema-style.css">
+    </head>
+<body>
+    <div class="img_kanban_v1">
+        <h1 class="title_kanban"> KANBAN V1</h1>
+        <img class="img_kanban_v1" src=".\img\kanban_v1.png" alt="">
+    </div>
+
+<h1>Diagrama de Relación: Clientes y Transacciones</h1>
+
+<div class="db-schema-container">
+
+    <div class="db-table" id="clientes">
+        <h4 class="table-name">CLIENTES</h4>
+        <ul class="column-list">
+            <li><span class="pk">id</span> <span class="type">SERIAL</span> <span class="key-info">PK</span></li>
+            <li>cedula <span class="type">VARCHAR</span> <span class="constraint">UNIQUE</span></li>
+            <li>nombre <span class="type">VARCHAR</span></li>
+            
+            <li>telefono <span class="type">VARCHAR</span></li>
+           
+            <li>fecha_registro <span class="type">TIMESTAMPTZ</span></li>
+            <li>activo <span class="type">BOOLEAN</span></li>
+        </ul>
+    </div>
+    
+
+
+    <div class="relationship">
+        <div class="cardinality">(1)</div>
+        <div class="line">----------&gt;</div>
+        <div class="relationship-name">Tiene</div>
+        <div class="cardinality">(N)</div>
+        <div class="fk-involved">(cliente_id FK)</div>
+    </div>
+
+    <div class="db-table" id="transacciones">
+        <h4 class="table-name">TransaccionesCliente</h4>
+        <ul class="column-list">
+            <li><span class="pk">id</span> <span class="type">SERIAL</span> <span class="key-info">PK</span></li>
+            <li><span class="fk">cliente_id</span> <span class="type">INTEGER</span> <span class="key-info">FK</span></li>
+            <li>fecha_transaccion <span class="type">TIMESTAMPTZ</span></li>
+            <li>tipo_transaccion <span class="type">VARCHAR</span></li>
+            <li>descripcion <span class="type">TEXT</span></li>
+            <li>monto <span class="type">NUMERIC(18,2)</span></li>
+            <li>producto_id <span class="type">INTEGER</span> <span class="key-info">FK?</span></li>
+            <li>factura_ref <span class="type">VARCHAR</span></li>
+            <li>fecha_vencimiento <span class="type">DATE</span></li>
+            <li>moneda <span class="type">VARCHAR(3)</span></li>
+        </ul>
+    </div>
+
+    
+    <div class="relationship">
+        
+        <div class="line">----------&gt;</div>
+        
+    </div>
+    <div class="db-table" id="transacciones">
+        <h4 class="table-name">Tasa</h4>
+        <ul class="column-list">
+            <li><span class="pk">id</span> <span class="type">id</span> <span class="key-info">PK</span></li>         
+           
+            <li>Fecha<span class="type">DateTime</span> <span class="key-info">FK?</span></li>
+            <li>Monto<span class="type">INTEGER</span> <span class="key-info">FK?</span></li>
+                       
+            <li>moneda <span class="type">VARCHAR(3)</span></li>
+        </ul>
+    </div>
+    
+
+</div>
+
+
+
+</body>
+</html>
 
     <script src="app.js"></script>
 </body>
